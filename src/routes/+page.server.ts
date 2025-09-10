@@ -4,7 +4,9 @@ export async function load({ platform }) {
 		return { proposals: [] };
 	}
 
-	const tables = await platform.env.DB.prepare('SELECT sqlite_version() AS version').all();
+	const tables = await platform.env.DB.prepare(
+		"SELECT name FROM sqlite_master WHERE type='table';"
+	).all();
 
 	console.log('Tables: ', tables);
 

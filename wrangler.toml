@@ -10,7 +10,8 @@ observability = {
 binding = "DB"
 database_name = "emc_planning",
 database_id = "ca3bc565-e262-4e3a-8d0a-c3d523022e0e"
-preview_database_id = "DB" # Required for Pages local development
+experimental_remote = true
+
 
 [[secrets_store]]
 binding = "SECRET"
