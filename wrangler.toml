@@ -1,0 +1,18 @@
+name = "em-c-proposals"
+compatibility_date = "2025-09-10"
+compatibility_flags = ["nodejs_als"]
+pages_build_output_dir = ".svelte-kit/cloudflare"
+observability = {
+    "enabled": true
+}
+
+[[d1_databases]]
+binding = "DB"
+database_name = "emc_planning",
+database_id = "ca3bc565-e262-4e3a-8d0a-c3d523022e0e"
+preview_database_id = "DB" # Required for Pages local development
+
+[[secrets_store]]
+binding = "SECRET"
+secret_name = "emc_db_secret"
+
