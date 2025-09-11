@@ -17,3 +17,6 @@ experimental_remote = true
 binding = "SECRET"
 secret_name = "emc_db_secret"
 
+[vars]
+TEMPLATE="https://em-c-proposals.pages.dev/templates/ccbTemplate.pdf"
+
