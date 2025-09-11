@@ -1,4 +1,5 @@
 <script>
+	import { page } from '$app/state';
 	import QuillInput from '$lib/components/userActions/inputs/quillInput/QuillInput.svelte';
 	import General from '$lib/components/userActions/inputs/general/General.svelte';
 
@@ -10,7 +11,14 @@
 	label={'Mission Impact / Risk (explain): '}
 	placeholder={'Please describe mission impact if completed, and not completed.'}
 	required={true}
-	messages={[]}
+	messages={[
+		{
+			active: page?.form?.mission_impact_missing,
+			type: 'danger',
+			msg: 'A mission impact statement is required.',
+			themeBase
+		}
+	]}
 	{themeBase}
 	type={'Edit'}
 	value={'{"text":"Test of the value item. I like this. Test\\n","styled":{"ops":[{"insert":"Test of the value "},{"attributes":{"bold":true},"insert":"item"},{"insert":". I like this. Test\\n"}]}}'}

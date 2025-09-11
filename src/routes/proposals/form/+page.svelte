@@ -60,20 +60,13 @@
 				</fieldset>
 			</div>
 
-			<!-- <div class="form-grid"> -->
 			<fieldset>
 				<legend>Dependencies & Risks</legend>
 				<DependenciesRisks {themeBase} />
 			</fieldset>
 
-			<!-- <fieldset>
-					<legend>Administrative Information</legend>
-					<AdministrativeInfo {themeBase} />
-				</fieldset> -->
-			<!-- </div> -->
-
 			<fieldset>
-				<legend>Feature Overview</legend>
+				<legend>Feature Details</legend>
 				<FeatureOverview {themeBase} />
 			</fieldset>
 

@@ -36,7 +36,8 @@ export default class QuillInit {
 			if (source == 'user' || answer)
 				this.value = JSON.stringify({
 					styled: this.editor.getContents(),
-					html: DOMPurify.sanitize(this.editor.getSemanticHTML().replaceAll('&nbsp;', ' '))
+					html: DOMPurify.sanitize(this.editor.getSemanticHTML().replaceAll('&nbsp;', ' ')),
+					text: this.editor.getText()
 				});
 
 			console.log('Updated Value: ', this.value);

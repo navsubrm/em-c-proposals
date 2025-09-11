@@ -24,14 +24,14 @@
 </script>
 
 <tr>
-	<td>{proposal.status ? JSON.parse(proposal.status).label : null}</td>
-	<td>{JSON.parse(proposal.category).label}</td>
-	<td>{JSON.parse(proposal.system).label}</td>
+	<td>{proposal.status || null}</td>
+	<td>{proposal.category}</td>
+	<td>{proposal.system}</td>
 	<td>{proposal.title}</td>
-	<td>{proposal.lastName}, {proposal.firstName}</td>
-	<td>$ {proposal.costSavings}</td>
-	<td>{proposal.timeSavings}</td>
-	<td>{JSON.parse(proposal.priority).label}</td>
+	<td>{proposal.last_name}, {proposal.first_name}</td>
+	<td>$ {proposal.cost_savings}</td>
+	<td>{proposal.time_savings}</td>
+	<td>{proposal.priority}</td>
 	<td>
 		{#if url.length < 1 && !processing}
 			<form

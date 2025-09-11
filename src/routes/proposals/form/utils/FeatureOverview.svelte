@@ -1,4 +1,5 @@
 <script>
+	import { page } from '$app/state';
 	import General from '$lib/components/userActions/inputs/general/General.svelte';
 	import QuillInput from '$lib/components/userActions/inputs/quillInput/QuillInput.svelte';
 	import SelectInput from '$lib/components/userActions/inputs/select/SelectInput.svelte';
@@ -22,7 +23,14 @@
 			label={'Associated System Component: '}
 			placeholder={'Select the appropriate sub-system...'}
 			required={true}
-			messages={[]}
+			messages={[
+				{
+					active: page?.form?.system_missing,
+					type: 'danger',
+					msg: 'System is required.',
+					themeBase
+				}
+			]}
 			{themeBase}
 			multiple={false}
 			items={[
@@ -42,7 +50,14 @@
 			label={'Proposal Type (New or Iteration): '}
 			placeholder={'Select whether this is new, or an interation to previous proposal.'}
 			required={true}
-			messages={[]}
+			messages={[
+				{
+					active: page?.form?.system_missing,
+					type: 'danger',
+					msg: 'System is required.',
+					themeBase
+				}
+			]}
 			{themeBase}
 			multiple={false}
 			items={['New', 'Iteration']}
@@ -55,7 +70,14 @@
 			label={'Category: '}
 			placeholder={'Select the appropriate category...'}
 			required={true}
-			messages={[]}
+			messages={[
+				{
+					active: page?.form?.category_missing,
+					type: 'danger',
+					msg: 'Category is required.',
+					themeBase
+				}
+			]}
 			{themeBase}
 			multiple={false}
 			items={['UX', 'Performance', 'Security', 'Automation', 'Bug', 'Feature']}
@@ -67,7 +89,14 @@
 			label={'Requested Priority (Urgency / Timeline Driver): '}
 			placeholder={'Choose a priority for the request...'}
 			required={true}
-			messages={[]}
+			messages={[
+				{
+					active: page?.form?.priority_missing,
+					type: 'danger',
+					msg: 'Priority is required.',
+					themeBase
+				}
+			]}
 			{themeBase}
 			multiple={false}
 			items={[
@@ -85,7 +114,14 @@
 	label={'Problem Statement: '}
 	placeholder={'Please describe the problem you are request a change to correct.'}
 	required={true}
-	messages={[]}
+	messages={[
+		{
+			active: page?.form?.problem_statement_missing,
+			type: 'danger',
+			msg: 'A problem statement is required.',
+			themeBase
+		}
+	]}
 	{themeBase}
 	type={'Edit'}
 	value={'{"styled":{"ops":[{"insert":"Test of the value "},{"attributes":{"bold":true},"insert":"item"},{"insert":". I like this. Test of new DOMPurify\\n"}]},"html":"<p>Test of the value <strong>item</strong>. I like this. Test of new DOMPurify</p>"}'}
@@ -96,7 +132,14 @@
 	label={'Proposed Change: '}
 	placeholder={'Please describe how the system should work in the proposed implementation.'}
 	required={true}
-	messages={[]}
+	messages={[
+		{
+			active: page?.form?.change_statement_missing,
+			type: 'danger',
+			msg: 'A proposed change statement is required.',
+			themeBase
+		}
+	]}
 	{themeBase}
 	type={'Edit'}
 	value={'{"text":"Test of the value item. I like this.\\n","styled":{"ops":[{"insert":"Test of the value item. I like this.\\n"}]}}'}

@@ -5,6 +5,8 @@
 
 	let table = $state();
 	let theme = $state(setTheme('Two', 'theme'));
+
+	$inspect('Proposal List: ', page?.data?.proposals);
 </script>
 
 <section
@@ -37,7 +39,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					{#each proposals as proposal}
+					{#each proposals.results as proposal}
 						<Proposal {proposal} />
 					{/each}
 				</tbody>
