@@ -23,11 +23,16 @@ export const actions = {
 
 		const proposal = results.results[0];
 
-		console.log('Proposal from create PDF: ', proposal);
+		//console.log('Proposal from create PDF: ', proposal);
 
-		const __filename = fileURLToPath(import.meta.url);
-		const __dirname = path.dirname(__filename);
-		const existingPdfBytes = fs.readFileSync(path.join(__dirname, './utils/ccbTemplate.pdf'));
+		// const __filename = fileURLToPath(import.meta.url);
+		// const __dirname = path.dirname(__filename);
+		// const existingPdfBytes = fs.readFileSync(path.join(__dirname, './utils/ccbTemplate.pdf'));
+
+		const formUrl = '/templates/ccbTemplate.pdf';
+
+		const existingPdfBytes = await fetch(formUrl).then((res) => res.arrayBuffer());
+
 		const pdfDoc = await PDFDocument.load(existingPdfBytes);
 		const form = pdfDoc.getForm();
 		const date_filed = new Date(proposal?.date_filed || '').toLocaleDateString();
