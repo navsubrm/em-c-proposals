@@ -1,8 +1,9 @@
 import { fail } from '@sveltejs/kit';
 import { PDFDocument } from 'pdf-lib';
-import { fileURLToPath } from 'url';
-import path from 'path';
-import fs from 'fs';
+// import { fileURLToPath } from 'url';
+// import path from 'path';
+// import fs from 'fs';
+import { TEMPLATE } from '$env/static/private';
 
 export async function load({ platform }) {
 	if (!platform?.env?.DB) return { proposals: [] };
@@ -29,9 +30,7 @@ export const actions = {
 		// const __dirname = path.dirname(__filename);
 		// const existingPdfBytes = fs.readFileSync(path.join(__dirname, './utils/ccbTemplate.pdf'));
 
-		const formUrl = '/templates/ccbTemplate.pdf';
-
-		const existingPdfBytes = await fetch(formUrl).then((res) => res.arrayBuffer());
+		const existingPdfBytes = await fetch(TEMPLATE).then((res) => res.arrayBuffer());
 
 		const pdfDoc = await PDFDocument.load(existingPdfBytes);
 		const form = pdfDoc.getForm();
