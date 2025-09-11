@@ -30,9 +30,15 @@ export const actions = {
 		// const __dirname = path.dirname(__filename);
 		// const existingPdfBytes = fs.readFileSync(path.join(__dirname, './utils/ccbTemplate.pdf'));
 
-		const existingPdfBytes = await fetch(TEMPLATE).then((res) => res.arrayBuffer());
+		console.log('Template URL: ', TEMPLATE);
 
+		const pdfUrl = 'https://em-c-proposals.pages.dev/templates/ccbTemplate.pdf';
+
+		//!TEMPLATE ? env.TEMPLATE : TEMPLATE
+
+		const existingPdfBytes = await fetch(pdfUrl).then((res) => res.arrayBuffer());
 		const pdfDoc = await PDFDocument.load(existingPdfBytes);
+
 		const form = pdfDoc.getForm();
 		const date_filed = new Date(proposal?.date_filed || '').toLocaleDateString();
 		const submitter = `${proposal?.last_name}, ${proposal?.first_name} ${proposal?.position}`;
