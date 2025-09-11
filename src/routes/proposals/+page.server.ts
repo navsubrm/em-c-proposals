@@ -3,7 +3,7 @@ import { PDFDocument } from 'pdf-lib';
 // import { fileURLToPath } from 'url';
 // import path from 'path';
 // import fs from 'fs';
-import { TEMPLATE } from '$env/static/private';
+// import { TEMPLATE } from '$env/static/private';
 
 export async function load({ platform }) {
 	if (!platform?.env?.DB) return { proposals: [] };
