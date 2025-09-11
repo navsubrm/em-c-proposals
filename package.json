@@ -4,7 +4,7 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
-		"dev": "vite dev && wrangler pages dev --d1 DB",
+		"dev": "vite dev && wrangler pages dev --d1=DB --persist",
 		"build": "vite build",
 		"preview": "npm run build && wrangler pages dev",
 		"prepare": "svelte-kit sync || echo ''",
@@ -39,5 +39,12 @@
 		"vitest": "^3.2.3",
 		"vitest-browser-svelte": "^0.1.0",
 		"wrangler": "^4.35.0"
+	},
+	"dependencies": {
+		"dompurify": "^3.2.6",
+		"pdf-lib": "^1.17.1",
+		"quill": "^2.0.3",
+		"svelte-select": "^5.8.3",
+		"ts-node": "^10.9.2"
 	}
 }

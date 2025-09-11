@@ -4,15 +4,9 @@ export async function load({ platform }) {
 		return { proposals: [] };
 	}
 
-	const tables = await platform.env.DB.prepare(
-		"SELECT name FROM sqlite_master WHERE type='table';"
-	).all();
+	//const result = await platform.env.DB.prepare('SELECT * FROM proposals LIMIT 5').run();
 
-	console.log('Tables: ', tables);
-
-	const result = await platform.env.DB.prepare('SELECT * FROM proposals LIMIT 5').run();
-
-	console.log('Result: ', result);
+	//return { initString: IS_DEV ? (await parent()).initString : null };
 
 	return {};
 }

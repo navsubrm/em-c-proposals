@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	scroll-behavior: smooth;
+}
+
+:root {
+	--logo-bg: #051a31;
+	--logo-silver: #c9ced3;
+	--logo-dim-silver: #566b7d;
+	--color-primary-dark-blue: #041b31;
+	--color-text-dark-gray: #2a2a2a; /* Standard body and heading text */
+	--color-accent-blue: #32b5f7; /* Secondary blue—CTAs, hover states, links */
+	--color-security-purple: #7d58ff; /* Used for security-specific services and infographics */
+	--color-highlight-orange: #f07c41; /* Emphasis color for calls to action or urgency */
+	--color-teal-accent: #1ba39c; /* Represents innovation, trust, and clarity—great for banners, infographics, and UI highlights */
+	--color-light-neutral: #f5f7fa; /* Background, white space, layout balance */
+	--color-alert-red: #d9534f; /* warnings or risk-related content */
+	--color-functional-green: #4caf50; /* Status indicators, progress, compliance success */
+	--font-title-font-family: 'Montserrat', sans-serif;
+	--font-body-font-family: 'Open Sans', sans-serif;
+	--font-body-lato-clean-font-family: 'Lato Clean', sans-serif;
+	--font-caption-font-family: 'Roboto Condensed Light', serif;
+	--font-quote-font-family: 'Playfair Display', serif;
+	--font-title-font-weight: 700;
+	--font-body-font-weight: 500;
+	--font-caption-font-weight: 400;
+	--font-title-style: capitalize;
+	--border-solid: solid;
+	--border-none: none;
+}
+
+.base-theme:where(h1, h2, h3, h4, h5, h6) {
+	font-family: var(--font-title-font-family);
+	font-weight: var(--font-title-font-weight);
+	text-transform: var(--font-title-style);
+}
+
+.base-theme:where(p, li, a) {
+	font-family: var(--font-body-font-family);
+	font-weight: var(--font-body-font-weight);
+}
+.base-theme:where(blockquote, q, code) {
+	font-family: var(--font-quote-font-family);
+	font-weight: var(--font-body-font-weight);
+}
+.base-theme:where(small) {
+	font-family: var(--font-caption-font-family);
+	font-weight: var(--font-caption-font-weight);
+}
+
+.base-theme:where(a) {
+	color: var(--color-accent-blue);
+	text-decoration: none;
+}
+.base-theme .primary-cta:where(a:hover),
+.secondary-cta:where(button) {
+	color: var(--color-highlight-blue);
+	text-decoration: none;
+}
+.base-theme .primary-cta:where(a:focus),
+.secondary-cta:where(button:hover) {
+	color: var(--color-highlight-orange);
+	text-decoration: none;
+}
+
+.base-theme .secondary-cta:where(a:hover),
+.primary-cta:where(button) {
+	color: var(--color-highlight-orange);
+	text-decoration: none;
+}
+.base-theme .secondary-cta:where(a:focus),
+.primary-cta:where(button:hover) {
+	color: var(--color-highlight-blue);
+	text-decoration: none;
+}
+
+.base-theme .alert {
+	color: var(--color-alert-red);
+}
+
+.base-theme .success {
+	color: var(--color-functional-green);
+}
+
+/* Awesome. I'm actually in the process of building our own VPC on GCP, so once I get that up and running I'll give you access to build a webserver.
+The color palette and fonts are below: */
+
+/*  
+Main font is seasons in emblem, ethereal is similar, but only 14.99 vice 25.99 a year.
+
+https://www.fontspring.com/fonts/kereatype/ethereal 
+
+*/
+
+:where(h1, h2, h3, textPath) {
+	font-family: var(--font-title-font-family), Arial, Helvetica, sans-serif;
+	font-weight: var(--font-title-font-weight);
+	font-size: 3em;
+	font-style: normal;
+	letter-spacing: -2px;
+}
+
+:where(h1, h2, h3) :where(strong) {
+	letter-spacing: 0px;
+}
+
+:where(:not(h1, h2, h3)) {
+	font-family: var(--font-body-font-family), Arial, Helvetica, sans-serif;
+}
+
+:where(:not(h1, h2, h3)) :where(strong) {
+	letter-spacing: 0.5px;
+	/* font-size: 1em; */
+}
+
+:where(h4, h5, h6) {
+	font-family: var(--font-body-lato-clean-font-family), system-ui;
+	font-weight: var(--font-body-font-weight);
+	font-style: normal;
+	line-height: 150%;
+	letter-spacing: 1.1px;
+	max-width: 65ch;
+	font-size: 1.3em;
+}
+
+:where(:not(h1, h2, h3, h4, h5, h6)) {
+	font-size: 1em;
+}
+
+:where(p) {
+	max-width: 65ch;
+	margin-block: 10px;
+	font-weight: var(--font-body-font-weight);
+}
+
+:where(em) {
+	font-style: italic;
+	color: inherit;
+}
+
+:where(a, a:visited) {
+	/* text-decoration: none; */
+	font-weight: bold;
+}
+
+:where(small) {
+	max-inline-size: none;
+}
+
+:where(h4, h5, h6) {
+	font-weight: var(--font-title-font-weight);
+}
+
+:where(ul) {
+	margin-left: 5ch;
+	line-height: 1.5;
+}
+
+h6 {
+	font-family: var(--font-title-font-family), Arial, Helvetica, sans-serif;
+	font-size: 1.2em;
+}
+
+.caption {
+	font-family: var(--font-caption-font-family), system-ui;
+	font-size: 0.8em;
+	font-weight: var(--font-caption-font-weight);
+}
+
+.quote {
+	font-family: var(--font-quote-font-family), system-ui;
+}
+
+@media (min-width: 600px) {
+	h1 {
+		font-size: 4em;
+	}
+}
+
+@media (max-width: 300px) {
+	:where(h1, h2, h3, textPath) {
+		font-size: 1.75em;
+	}
+	:where(h4, h5, h6, p) {
+		font-size: 0.9em;
+	}
+
+	:where(small) {
+		font-size: 0.6em;
+	}
+}
+
+@media (min-width: 1600px) {
+	:where(h1, h2, h3) {
+		font-size: 4.3;
+	}
+	:where(h4, h5, h6) {
+		font-size: 1.75;
+	}
+	:where(p, strong, em, a) {
+		font-size: 1.2em;
+	}
+}
