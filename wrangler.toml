@@ -12,11 +12,6 @@ database_name = "emc_planning",
 database_id = "ca3bc565-e262-4e3a-8d0a-c3d523022e0e"
 experimental_remote = true
 
-
 [[secrets_store]]
 binding = "SECRET"
 secret_name = "emc_db_secret"
-
-[vars]
-TEMPLATE="https://em-c-proposals.pages.dev/templates/ccbTemplate.pdf"
-

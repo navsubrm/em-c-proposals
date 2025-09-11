@@ -48,6 +48,31 @@ declare global {
 			completed_pi: FormDataEntryValue | number | null;
 		};
 
+		type ProposalRecord = {
+			_id?: UUID | string;
+			last_name?: string;
+			first_name?: string;
+			email?: string;
+			position?: string;
+			organization?: string;
+			cost_savings?: number;
+			time_savings?: number;
+			title?: string;
+			system?: string;
+			type?: string;
+			category?: string;
+			priority?: string;
+			problem_statement?: string;
+			change_statement?: string;
+			mission_impact?: string;
+			other_considerations?: string;
+			date_filed?: Date | null;
+			date_approved?: Date | null;
+			status?: string;
+			projected_pi?: number | null;
+			completed_pi?: number | null;
+		};
+
 		type NewProposalResponse = {
 			proposal?: NewProposalRequestData;
 			success?: boolean;
@@ -74,6 +99,8 @@ declare global {
 		interface Platform {
 			env: {
 				DB: D1Database;
+				TEMPLATE: string;
+				IS_DEV: boolean;
 			};
 			context: {
 				waitUntil(promise: Promise<any>): void;

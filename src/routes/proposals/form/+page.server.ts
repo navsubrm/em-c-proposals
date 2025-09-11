@@ -1,6 +1,5 @@
 import { fail } from '@sveltejs/kit';
-
-const dev = false;
+import { PROPOSAL_FORM_TEST } from '$env/static/private';
 
 export async function load() {
 	return {};
@@ -13,6 +12,32 @@ export const actions = {
 				fail: true,
 				connection_error: true
 			};
+		}
+
+		if (PROPOSAL_FORM_TEST) {
+			await new Promise((resolve) => setTimeout(resolve, 2000));
+			return fail(409, {
+				success: false,
+				fail: true,
+				first_name_missing: true,
+				last_name_missing: true,
+				email_missing: true,
+				position_missing: true,
+				organization_missing: true,
+				cost_savings_missing: true,
+				time_savings_missing: true,
+				title_missing: true,
+				system_missing: true,
+				type_missing: true,
+				category_missing: true,
+				priority_missing: true,
+				problem_statement_missing: true,
+				change_statement_missing: true,
+				mission_impact_missing: true,
+				other_considerations_missing: true,
+				unknown_error: true,
+				connection_error: true
+			});
 		}
 
 		const formData: FormData = await request.formData();
@@ -45,35 +70,6 @@ export const actions = {
 			projected_pi: null,
 			completed_pi: null
 		};
-
-		console.log('Proposal Content: ', proposal);
-
-		if (dev) {
-			await new Promise((resolve) => setTimeout(resolve, 2000));
-			return fail(409, {
-				success: true,
-				fail: true,
-				first_name_missing: true,
-				last_name_missing: true,
-				email_missing: true,
-				position_missing: true,
-				organization_missing: true,
-				cost_savings_missing: true,
-				time_savings_missing: true,
-				title_missing: true,
-				system_missing: true,
-				type_missing: true,
-				category_missing: true,
-				priority_missing: true,
-				problem_statement_missing: true,
-				change_statement_missing: true,
-				mission_impact_missing: true,
-				other_considerations_missing: true,
-				unknown_error: true,
-				connection_error: true,
-				...proposal
-			});
-		}
 
 		/**
 		 * ?? Handle validations for length, sanitization, and accuracy with individual functions.
