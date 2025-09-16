@@ -37,8 +37,6 @@
 	$effect(() => {
 		if (didMount && quill) value = quill.value;
 	});
-
-	//$inspect('Quill Input: ', quill?.value, value);
 </script>
 
 <span
@@ -97,9 +95,7 @@
 	span :global(.ql-toolbar),
 	span :global(.ql-container) {
 		border: none;
-		/* min-width: 300px; */
 		width: 100%;
-		/* max-width: 70ch; */
 	}
 
 	span:hover :global(.ql-editor),
@@ -182,7 +178,14 @@
 		transform: translateY(15px) translateZ(-1);
 		height: 15px;
 		overflow: hidden;
-		transition: all 0.25s linear allow-discrete;
+	}
+
+	.editor-container :global(.ql-container) {
+		transform: translateY(-15px);
+
+		@starting-style {
+			transform: translateY(0);
+		}
 	}
 
 	.editor-container:focus :global(.ql-toolbar:hover),
@@ -200,18 +203,10 @@
 		}
 	}
 
-	.editor-container :global(.ql-container) {
-		transform: translateY(-15px);
-		transition: all 0.25s linear allow-discrete;
-
-		@starting-style {
-			transform: translateY(0);
-		}
-	}
-
 	.editor-container:focus :global(.ql-container),
 	.editor-container:focus-within :global(.ql-container) {
 		transform: unset;
+		transition: all 0.25s linear allow-discrete;
 	}
 
 	span :global(.ql-picker-label:hover .ql-stroke),

@@ -24,6 +24,7 @@ declare global {
 		// }
 
 		type NewProposalRequestData = {
+			id?: FormDataEntryValue | undefined;
 			_id: UUID | FormDataEntryValue | string;
 			last_name: FormDataEntryValue | string;
 			first_name: FormDataEntryValue | string;
@@ -41,7 +42,7 @@ declare global {
 			change_statement: FormDataEntryValue | QuillInputValue;
 			mission_impact: FormDataEntryValue | QuillInputValue;
 			other_considerations: FormDataEntryValue | QuillInputValue;
-			date_filed: FormDataEntryValue | Date | null;
+			date_filed: FormDataEntryValue | string | null;
 			date_approved: FormDataEntryValue | Date | null;
 			status: FormDataEntryValue | SelectInput;
 			projected_pi: FormDataEntryValue | number | null;
@@ -66,8 +67,8 @@ declare global {
 			change_statement?: string;
 			mission_impact?: string;
 			other_considerations?: string;
-			date_filed?: Date | null;
-			date_approved?: Date | null;
+			date_filed?: string | null;
+			date_approved?: string | null;
 			status?: string;
 			projected_pi?: number | null;
 			completed_pi?: number | null;

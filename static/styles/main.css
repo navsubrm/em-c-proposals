@@ -144,10 +144,11 @@ https://www.fontspring.com/fonts/kereatype/ethereal
 	color: inherit;
 }
 
-:where(a, a:visited) {
-	/* text-decoration: none; */
+/* :where(a:hover) {
+	text-decoration: none;
+	scale: 1.02;
 	font-weight: bold;
-}
+} */
 
 :where(small) {
 	max-inline-size: none;
@@ -203,7 +204,7 @@ h6 {
 	:where(h4, h5, h6) {
 		font-size: 1.75;
 	}
-	:where(p, strong, em, a) {
+	/* :where(p, strong, em, a) {
 		font-size: 1.2em;
-	}
+	} */
 }

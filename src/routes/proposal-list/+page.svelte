@@ -5,8 +5,6 @@
 
 	let table = $state();
 	let theme = $state(setTheme('Two', 'theme'));
-
-	$inspect('Proposal List: ', page?.data?.proposals);
 </script>
 
 <section
@@ -25,16 +23,18 @@
 			<table>
 				<thead>
 					<tr>
+						<th>Priority</th>
 						<th>Status</th>
+						<th>Organization</th>
+						<th>Submitter</th>
 						<th>Category</th>
 						<th>System</th>
 						<th>Title</th>
-						<th>Submitter</th>
-						<th>$ Savings</th>
+						<th>Cost Savings</th>
 						<th>Time Savings</th>
-						<th>Priority</th>
-						<th>Review</th>
-						<th>Update</th>
+						<th>Route</th>
+						<th>Details</th>
+						<th>Edit</th>
 						<th>Delete</th>
 					</tr>
 				</thead>
@@ -61,7 +61,7 @@
 	}
 
 	h1 {
-		margin-block: 1em;
+		margin-bottom: 0.5em;
 	}
 
 	.table-container {
@@ -86,7 +86,7 @@
 		border-collapse: collapse;
 	}
 
-	tr:hover {
-		background: color-mix(in lab, var(--_background), var(--_text) 10%);
-	}
+	/* tr {
+		background: color-mix(in lab, var(--_bold), var(--_background) 90%);
+	} */
 </style>
