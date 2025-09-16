@@ -2,7 +2,7 @@ name = "em-c-proposals"
 compatibility_date = "2025-09-10"
 compatibility_flags = ["nodejs_als", "nodejs_compat"]
 preview_urls = true
-account_id = SvWdThM_N2JTyYqgmnemJRMv4nOytpNrw9l2bIWD
+account_id = "SvWdThM_N2JTyYqgmnemJRMv4nOytpNrw9l2bIWD"
 
 [assets]
 directory = ".svelte-kit/cloudflare"
@@ -12,6 +12,12 @@ binding = "ASSETS"
 observability = {
     "enabled": true
 }
+
+[vars]
+IS_DEV = "false"
+TEMPLATE = "https://em-c-proposals.pages.dev/templates/ccbTemplate.pdf"
+PROPOSAL_FORM_TEST = false
+CLOUDFLARE_API_TOKEN = "SvWdThM_N2JTyYqgmnemJRMv4nOytpNrw9l2bIWD"
 
 [[d1_databases]]
 binding = "DB"

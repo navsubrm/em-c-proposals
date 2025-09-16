@@ -27,7 +27,8 @@
 	"vars": {
 		"IS_DEV": "false",
 		"TEMPLATE": "https://em-c-proposals.pages.dev/templates/ccbTemplate.pdf",
-		"PROPOSAL_FORM_TEST": false
+		"PROPOSAL_FORM_TEST": false,
+		"CLOUDFLARE_API_TOKEN": "SvWdThM_N2JTyYqgmnemJRMv4nOytpNrw9l2bIWD"
 	},
 	"preview_urls": true
 

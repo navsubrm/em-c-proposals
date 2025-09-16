@@ -14,7 +14,7 @@
 		"lint": "prettier --check . && eslint .",
 		"test:unit": "vitest",
 		"test": "npm run test:unit -- --run",
-		"deploy": "npm run build && wrangler deploy",
+		"deploy": "npm run build && npx wrangler whoami && wrangler deploy",
 		"cf-typegen": "wrangler types src/worker-configuration.d.ts"
 	},
 	"devDependencies": {
