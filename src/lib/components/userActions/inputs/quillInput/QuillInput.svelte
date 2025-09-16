@@ -50,11 +50,11 @@
 			--_bold: var({form.seven}); 
 			--_anchor: var({form.eight})"
 >
-	<Label {name} {label} {required} {messages} {themeBase} />
-	<div class="inputs" class:edit={type == 'Edit'} class:display={type == 'Display'}>
-		<div bind:this={input}></div>
-		<input type="hidden" {name} bind:value />
-	</div>
+		<Label {name} {label} {required} {messages} {themeBase} />
+		<div class="inputs" class:edit={type == 'Edit'} class:display={type == 'Display'}>
+			<div bind:this={input}></div>
+			<input type="hidden" {name} bind:value />
+		</div>
 </span>
 
 <style>
