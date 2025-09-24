@@ -102,6 +102,7 @@ declare global {
 				DB: D1Database;
 				TEMPLATE: string;
 				IS_DEV: boolean;
+				ASSETS: Fetcher;
 			};
 			context: {
 				waitUntil(promise: Promise<any>): void;

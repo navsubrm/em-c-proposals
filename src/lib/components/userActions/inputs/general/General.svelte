@@ -13,7 +13,8 @@
 		required = false,
 		messages,
 		value = $bindable(''),
-		themeBase = 'One'
+		themeBase = 'One',
+		multiple = false
 	}: Props = $props();
 
 	let theme = $state(setTheme(themeBase, 'form'));
@@ -37,7 +38,17 @@
 		{/if}
 	</div>
 
-	<input {type} {name} bind:value {placeholder} {min} {max} {step} data-testid={name} />
+	<input
+		{type}
+		{name}
+		bind:value
+		{placeholder}
+		{min}
+		{max}
+		{step}
+		data-testid={name}
+		multiple={type == 'file' ? multiple : undefined}
+	/>
 </span>
 
 <style>

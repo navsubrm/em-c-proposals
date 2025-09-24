@@ -1,4 +1,5 @@
 import { fail } from '@sveltejs/kit';
+import { PDFDocument } from 'pdf-lib';
 import { PROPOSAL_FORM_TEST } from '$env/static/private';
 import { dataBaseCheck } from '$lib/server/dataBaseCheck.js';
 import { formTest } from './utils/formTest';
@@ -58,5 +59,56 @@ export const actions = {
 
 			return fail(500, { fail: true, unknown_error: true });
 		}
+	},
+	'upload-proposal': async ({ request, platform }) => {
+		if (!dataBaseCheck(platform)) return fail(500, { fail: true, connection_error: true });
+		if (PROPOSAL_FORM_TEST) await formTest();
+
+		const data = Object.fromEntries(await request.formData());
+		const file = data?.proposal_upload as File;
+		if (file?.type !== 'application/pdf') return fail(409, { upload_type_error: true });
+		const proposalBytes = await file?.arrayBuffer();
+		if (!proposalBytes) return fail(500, { fail: true });
+		const pdfDoc = await PDFDocument.load(proposalBytes);
+		const form = pdfDoc.getForm();
+
+		const getSubmitter = form.getTextField('submitter').getText()?.split(/[, ]+/);
+
+		const newProposal = {
+			last_name: getSubmitter ? getSubmitter[0] : null,
+			first_name: getSubmitter ? getSubmitter[1] : null,
+			position: getSubmitter ? getSubmitter[2] : null,
+			organization: form.getTextField('organization').getText(),
+			date_filed: form.getTextField('dateFiled_es_:date').getText(),
+			submitter: form.getTextField('submitter').getText(),
+			email: form.getTextField('email').getText(),
+			status: form.getTextField('status').getText(),
+			priority: form.getTextField('priority').getText(),
+			title: form.getTextField('title').getText(),
+			cost_savings: form.getTextField('costSavings').getText(),
+			time_savings: form.getTextField('timeSavings').getText(),
+			mission_impact: JSON.stringify({
+				styled: { ops: [{ insert: form.getTextField('missionImpact').getText() }] }
+			}),
+			approved_pi: form.getTextField('approvedPi').getText(),
+			system: form.getTextField('system').getText(),
+			type: form.getTextField('type').getText(),
+			category: form.getTextField('category').getText(),
+			problem_statement: JSON.stringify({
+				styled: { ops: [{ insert: form.getTextField('problemStatement').getText() }] }
+			}),
+			change_statement: JSON.stringify({
+				styled: { ops: [{ insert: form.getTextField('changeStatement').getText() }] }
+			}),
+			other_considerations: JSON.stringify({
+				styled: { ops: [{ insert: form.getTextField('otherConsiderations').getText() }] }
+			})
+		};
+
+		/**
+		 * ! Update this later to include digital signatures. Also, look at pushing the form directly to the database without intervention.
+		 */
+
+		return { success: true, ...newProposal };
 	}
 };

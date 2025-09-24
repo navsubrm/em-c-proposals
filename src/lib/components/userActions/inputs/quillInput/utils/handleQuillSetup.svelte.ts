@@ -25,14 +25,16 @@ export default class QuillInit {
 	}
 
 	editorInit() {
-		if (this.value) this.editor.setContents(JSON.parse(this.value).styled);
+		if (this.value) {
+			this.editor.setContents(JSON.parse(this.value)?.styled);
+		}
 
 		this.editor.on('text-change', (delta: Delta, oldDelta: Delta, source: string) => {
 			let answer = false;
-			if (source == 'api')
-				answer = confirm(
-					'The record has been updated on the server, would you like to see the updates?  Your changes will be lost.'
-				);
+			// if (source == 'api')
+			// 	answer = confirm(
+			// 		'The record has been updated on the server, would you like to see the updates?  Your changes will be lost.'
+			// 	);
 			if (source == 'user' || answer)
 				this.value = JSON.stringify({
 					styled: this.editor.getContents(),

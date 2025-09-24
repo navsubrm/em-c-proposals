@@ -17,6 +17,7 @@
 			return;
 		}
 		url = `data:application/pdf;base64,${page?.form?.file}`;
+		console.log('Url return: ', url);
 	});
 
 	function handlePDFSubmit(e: SubmitEvent) {

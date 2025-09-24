@@ -1,10 +1,13 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
 	import { page } from '$app/state';
+	import General from '$lib/components/userActions/inputs/general/General.svelte';
 	import { setTheme } from '$lib/config/setTheme';
 	import Proposal from './utils/Proposal.svelte';
 
 	let table = $state();
-	let theme = $state(setTheme('Two', 'theme'));
+	let themeBase = $state('Two');
+	let theme = $derived(setTheme(themeBase, 'theme'));
 </script>
 
 <section

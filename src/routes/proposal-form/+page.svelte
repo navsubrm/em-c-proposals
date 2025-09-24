@@ -34,6 +34,8 @@
 	}
 
 	$inspect('Id param: ', page.url.searchParams.get('id'));
+	$inspect('Page Data: ', page?.data);
+	$inspect('Form response: ', page?.form);
 </script>
 
 <section
@@ -45,6 +47,40 @@
 	</div>
 
 	{#key cancelEntry}
+		<form action="?/upload-proposal" method="POST" enctype="multipart/form-data" use:enhance>
+			<fieldset>
+				<legend>Upload Completed Proposal </legend>
+				<General
+					type={'file'}
+					name={'proposal_upload'}
+					label={'Upload Proposal: '}
+					placeholder={'Upload Proposal.'}
+					required={false}
+					messages={[
+						{
+							active: page?.form?.upload_type_error,
+							type: 'danger',
+							msg: 'The file must be a PDF.',
+							themeBase
+						}
+					]}
+					{themeBase}
+					value={page?.data?.proposal?.proposal_upload || null}
+					multiple={true}
+				/>
+
+				<Submit
+					label={'Upload PDF Proposal'}
+					{processing}
+					{processingLabel}
+					fail={page?.form?.fail || false}
+					{failLabel}
+					success={page?.form?.success || false}
+					successLabel={'Proposal details populated.'}
+					{themeBase}
+				/>
+			</fieldset>
+		</form>
 		<form
 			action={!page?.data?.proposal ? '?/new-proposal' : '?/edit-proposal'}
 			method="POST"
@@ -77,7 +113,7 @@
 								}
 							]}
 							{themeBase}
-							value={page?.data?.proposal?.first_name || null}
+							value={page?.form?.first_name || page?.data?.proposal?.first_name || null}
 						/>
 
 						<General
@@ -95,7 +131,7 @@
 								}
 							]}
 							{themeBase}
-							value={page?.data?.proposal?.last_name || null}
+							value={page?.form?.last_name || page?.data?.proposal?.last_name || null}
 						/>
 					</div>
 
@@ -115,7 +151,7 @@
 								}
 							]}
 							{themeBase}
-							value={page?.data?.proposal?.email || null}
+							value={page?.form?.email || page?.data?.proposal?.email || null}
 						/>
 
 						<General
@@ -133,7 +169,7 @@
 								}
 							]}
 							{themeBase}
-							value={page?.data?.proposal?.position || null}
+							value={page?.form?.position || page?.data?.proposal?.position || null}
 						/>
 					</div>
 
@@ -152,7 +188,7 @@
 							}
 						]}
 						{themeBase}
-						value={page?.data?.proposal?.organization || null}
+						value={page?.form?.organization || page?.data?.proposal?.organization || null}
 					/>
 				</fieldset>
 
@@ -176,7 +212,7 @@
 								}
 							]}
 							{themeBase}
-							value={page?.data?.proposal?.cost_savings || null}
+							value={page?.form?.cost_savings || page?.data?.proposal?.cost_savings || null}
 						/>
 
 						<General
@@ -194,27 +230,31 @@
 								}
 							]}
 							{themeBase}
-							value={page?.data?.proposal?.time_savings || null}
+							value={page?.form?.time_savings || page?.data?.proposal?.time_savings || null}
 						/>
 					</div>
 
-					<QuillInput
-						name={'other_considerations'}
-						label={'Other Considerations (explain): '}
-						placeholder={'Please describe other efficiency gains from the change.'}
-						required={true}
-						messages={[
-							{
-								active: page?.form?.other_considerations_missing,
-								type: 'danger',
-								msg: 'Provide information for other considerations.',
-								themeBase
-							}
-						]}
-						{themeBase}
-						type={'Edit'}
-						value={page?.data?.proposal?.other_considerations || null}
-					/>
+					{#key page?.form}
+						<QuillInput
+							name={'other_considerations'}
+							label={'Other Considerations (explain): '}
+							placeholder={'Please describe other efficiency gains from the change.'}
+							required={true}
+							messages={[
+								{
+									active: page?.form?.other_considerations_missing,
+									type: 'danger',
+									msg: 'Provide information for other considerations.',
+									themeBase
+								}
+							]}
+							{themeBase}
+							type={'Edit'}
+							value={page?.form?.other_considerations ||
+								page?.data?.proposal?.other_considerations ||
+								null}
+						/>
+					{/key}
 				</fieldset>
 			</div>
 
@@ -237,7 +277,7 @@
 					]}
 					{themeBase}
 					type={'Edit'}
-					value={page?.data?.proposal?.mission_impact || null}
+					value={page?.form?.mission_impact || page?.data?.proposal?.mission_impact || null}
 				/>
 			</fieldset>
 
@@ -252,7 +292,7 @@
 					placeholder={'Enter the Proposal title.'}
 					required={true}
 					{themeBase}
-					value={page?.data?.proposal?.title || null}
+					value={page?.form?.title || page?.data?.proposal?.title || null}
 				/>
 
 				<div class="horizontal">
@@ -282,7 +322,7 @@
 								'JMT',
 								'BLITZAR'
 							]}
-							value={page?.data?.proposal?.system || null}
+							value={page?.form?.system || page?.data?.proposal?.system || null}
 						/>
 						<SelectInput
 							name={'type'}
@@ -300,7 +340,7 @@
 							{themeBase}
 							multiple={false}
 							items={['New', 'Iteration']}
-							value={page?.data?.proposal?.type || null}
+							value={page?.form?.type || page?.data?.proposal?.type || null}
 						/>
 					</div>
 					<div>
@@ -320,7 +360,7 @@
 							{themeBase}
 							multiple={false}
 							items={['UX', 'Performance', 'Security', 'Automation', 'Bug', 'Feature']}
-							value={page?.data?.proposal?.category || null}
+							value={page?.form?.category || page?.data?.proposal?.category || null}
 						/>
 
 						<SelectInput
@@ -344,7 +384,7 @@
 								{ value: 'Normal', label: 'Normal' },
 								{ value: 'Low', label: 'Low' }
 							]}
-							value={page?.data?.proposal?.priority || null}
+							value={page?.form?.priority || page?.data?.proposal?.priority || null}
 						/>
 					</div>
 				</div>
@@ -363,7 +403,7 @@
 					]}
 					{themeBase}
 					type={'Edit'}
-					value={page?.data?.proposal?.problem_statement || null}
+					value={page?.form?.problem_statement || page?.data?.proposal?.problem_statement || null}
 				/>
 
 				<QuillInput
@@ -381,7 +421,7 @@
 					]}
 					{themeBase}
 					type={'Edit'}
-					value={page?.data?.proposal?.change_statement || null}
+					value={page?.form?.change_statement || page?.data?.proposal?.change_statement || null}
 				/>
 			</fieldset>
 
@@ -428,6 +468,7 @@
 	form :global(.horizontal) {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+		align-items: center;
 		grid-auto-rows: auto;
 		gap: 0.5em;
 		flex: 1 1 0;

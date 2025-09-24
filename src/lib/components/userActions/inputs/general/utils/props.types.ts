@@ -12,4 +12,5 @@ export interface Props {
 	messages?: message[];
 	value?: string | null;
 	themeBase: string;
+	multiple?: boolean;
 }

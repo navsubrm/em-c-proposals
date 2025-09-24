@@ -1,4 +1,4 @@
-import { fail } from '@sveltejs/kit';
+import { fail, type Actions, type RequestEvent } from '@sveltejs/kit';
 import { PDFDocument } from 'pdf-lib';
 import { TEMPLATE } from '$env/static/private';
 import { dataBaseCheck } from '$lib/server/dataBaseCheck';
@@ -11,15 +11,20 @@ export async function load({ platform }) {
 	return { proposals: await proposalListQuery(platform) };
 }
 
-export const actions = {
-	returnPDF: async ({ request, platform }) => {
+export const actions: Actions = {
+	returnPDF: async ({ request, platform }: RequestEvent) => {
 		try {
 			if (!dataBaseCheck(platform)) return fail(500, { fail: true, connection_error: true });
 
 			const data = Object.fromEntries(await request.formData());
 			const results = await proposalByIdQuery(platform, data.id);
 			const proposal: App.ProposalRecord = results?.results[0] as App.ProposalRecord;
-			const existingPdfBytes = await fetch(TEMPLATE).then((res) => res.arrayBuffer());
+			const existingPdfBytes: ArrayBuffer | undefined = await platform?.env.ASSETS.fetch(
+				TEMPLATE
+			).then((res) => res.arrayBuffer());
+
+			if (!existingPdfBytes) return fail(500, { fail: true });
+
 			const pdfDoc = await PDFDocument.load(existingPdfBytes);
 			const form = pdfDoc.getForm();
 			const date_filed = new Date(proposal?.date_filed || '').toLocaleDateString();

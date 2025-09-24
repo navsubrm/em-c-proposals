@@ -1,0 +1,5 @@
+npx wrangler whoami &&
+
+account_id = "SvWdThM_N2JTyYqgmnemJRMv4nOytpNrw9l2bIWD"
+
+CLOUDFLARE_API_TOKEN = "SvWdThM_N2JTyYqgmnemJRMv4nOytpNrw9l2bIWD"
