@@ -72,15 +72,12 @@ export const actions = {
 		const pdfDoc = await PDFDocument.load(proposalBytes);
 		const form = pdfDoc.getForm();
 
-		const getSubmitter = form.getTextField('submitter').getText()?.split(/[, ]+/);
-
 		const newProposal = {
-			last_name: getSubmitter ? getSubmitter[0] : null,
-			first_name: getSubmitter ? getSubmitter[1] : null,
-			position: getSubmitter ? getSubmitter[2] : null,
+			last_name: form.getTextField('last_name').getText(),
+			first_name: form.getTextField('first_name').getText(),
+			position: form.getTextField('position').getText(),
 			organization: form.getTextField('organization').getText(),
 			date_filed: form.getTextField('dateFiled_es_:date').getText(),
-			submitter: form.getTextField('submitter').getText(),
 			email: form.getTextField('email').getText(),
 			status: form.getTextField('status').getText(),
 			priority: form.getTextField('priority').getText(),
@@ -90,10 +87,6 @@ export const actions = {
 			mission_impact: JSON.stringify({
 				styled: { ops: [{ insert: form.getTextField('missionImpact').getText() }] }
 			}),
-			approved_pi: form.getTextField('approvedPi').getText(),
-			system: form.getTextField('system').getText(),
-			type: form.getTextField('type').getText(),
-			category: form.getTextField('category').getText(),
 			problem_statement: JSON.stringify({
 				styled: { ops: [{ insert: form.getTextField('problemStatement').getText() }] }
 			}),
@@ -102,7 +95,11 @@ export const actions = {
 			}),
 			other_considerations: JSON.stringify({
 				styled: { ops: [{ insert: form.getTextField('otherConsiderations').getText() }] }
-			})
+			}),
+			approved_pi: form.getTextField('approvedPi').getText(),
+			system: form.getTextField('system').getText(),
+			type: form.getTextField('type').getText(),
+			category: form.getTextField('category').getText()
 		};
 
 		/**
