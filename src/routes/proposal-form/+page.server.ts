@@ -1,5 +1,6 @@
 import { fail } from '@sveltejs/kit';
 import { PDFDocument } from 'pdf-lib';
+import { processSingleSignature } from './utils/signatureHandler';
 import { PROPOSAL_FORM_TEST } from '$env/static/private';
 import { dataBaseCheck } from '$lib/server/dataBaseCheck.js';
 import { formTest } from './utils/formTest';
@@ -73,38 +74,46 @@ export const actions = {
 		const form = pdfDoc.getForm();
 
 		const newProposal = {
-			last_name: form.getTextField('last_name').getText(),
+			cost_savings: form.getTextField('dollars per year').getText(),
 			first_name: form.getTextField('first_name').getText(),
-			position: form.getTextField('position').getText(),
-			organization: form.getTextField('organization').getText(),
-			date_filed: form.getTextField('dateFiled_es_:date').getText(),
-			email: form.getTextField('email').getText(),
-			status: form.getTextField('status').getText(),
-			priority: form.getTextField('priority').getText(),
-			title: form.getTextField('title').getText(),
-			cost_savings: form.getTextField('costSavings').getText(),
-			time_savings: form.getTextField('timeSavings').getText(),
-			mission_impact: JSON.stringify({
-				styled: { ops: [{ insert: form.getTextField('missionImpact').getText() }] }
+			last_name: form.getTextField('last_name').getText(),
+			// email: form?.getTextField('email')?.getText() || '',
+			organization: form.getTextField('organization_name').getText(),
+			position: form.getTextField('organization_title_rank').getText(),
+			time_savings: form.getTextField('time_savings').getText(),
+			title: form.getTextField('request_title').getText(),
+			priority: form.getDropdown('priority').getSelected(),
+			associated_system: form.getDropdown('associated_system').getSelected(),
+			change_type: form.getDropdown('change_type').getSelected(),
+			change_category: form.getDropdown('change_category').getSelected(),
+			mission_impact_statement: JSON.stringify({
+				styled: { ops: [{ insert: form.getTextField('mission_impact_statement').getText() }] }
 			}),
-			problem_statement: JSON.stringify({
-				styled: { ops: [{ insert: form.getTextField('problemStatement').getText() }] }
-			}),
-			change_statement: JSON.stringify({
-				styled: { ops: [{ insert: form.getTextField('changeStatement').getText() }] }
+			recommended_solution: JSON.stringify({
+				styled: { ops: [{ insert: form.getTextField('recommended_solution').getText() }] }
 			}),
 			other_considerations: JSON.stringify({
-				styled: { ops: [{ insert: form.getTextField('otherConsiderations').getText() }] }
+				styled: { ops: [{ insert: form.getTextField('other_considerations').getText() }] }
 			}),
-			approved_pi: form.getTextField('approvedPi').getText(),
-			system: form.getTextField('system').getText(),
-			type: form.getTextField('type').getText(),
-			category: form.getTextField('category').getText()
+			stakeholder_comments: JSON.stringify({
+				styled: { ops: [{ insert: form.getTextField('stakeholder_comments').getText() }] }
+			}),
+			submitter_signature: processSingleSignature(pdfDoc, 'submitter_signature'),
+			stakeholder_signature: processSingleSignature(pdfDoc, 'stakholder_signature'),
+			stakeholder_concur: form.getDropdown('stakholder_concur').getSelected(),
+			ccb_comments: JSON.stringify({
+				styled: { ops: [{ insert: form.getTextField('ccb_comments').getText() }] }
+			}),
+			ccb_concur: form.getDropdown('ccb_concur').getSelected(),
+			ccb_signature: processSingleSignature(pdfDoc, 'ccb_signature'),
+			projected_start_pi_number: form.getTextField('projected_start_pi_number').getText(),
+			projected_release_oa_number: form.getTextField('projected_release_oa_number').getText(),
+			road_map_approval: processSingleSignature(pdfDoc, 'road_map_approval'),
+			date_submitted: form.getTextField('date_submitted').getText()
+			// problem_statement: JSON.stringify({
+			// 	styled: { ops: [{ insert: form.getTextField('problem_statement').getText() }] }
+			// })
 		};
-
-		/**
-		 * ! Update this later to include digital signatures. Also, look at pushing the form directly to the database without intervention.
-		 */
 
 		return { success: true, ...newProposal };
 	}
