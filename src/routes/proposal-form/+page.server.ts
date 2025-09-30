@@ -74,45 +74,50 @@ export const actions = {
 		const form = pdfDoc.getForm();
 
 		const newProposal = {
-			cost_savings: form.getTextField('dollars per year').getText(),
-			first_name: form.getTextField('first_name').getText(),
-			last_name: form.getTextField('last_name').getText(),
-			// email: form?.getTextField('email')?.getText() || '',
-			organization: form.getTextField('organization_name').getText(),
-			position: form.getTextField('organization_title_rank').getText(),
-			time_savings: form.getTextField('time_savings').getText(),
-			title: form.getTextField('request_title').getText(),
-			priority: form.getDropdown('priority').getSelected(),
-			associated_system: form.getDropdown('associated_system').getSelected(),
-			change_type: form.getDropdown('change_type').getSelected(),
-			change_category: form.getDropdown('change_category').getSelected(),
+			//Page 1
+			cost_savings: form.getTextField('Projected Cost Savings').getText(),
+			first_name: form.getTextField('First Name').getText(),
+			last_name: form.getTextField('Last Name').getText(),
+			email: form?.getTextField('Email')?.getText() || '',
+			organization: form.getTextField('Submitting Organization').getText(),
+			position: form.getTextField('Title or Position').getText(),
+			time_savings: form.getTextField('Projected Time Savings').getText(),
+			title: form.getTextField('Request Title').getText(),
+			priority: form.getDropdown('Request Priority').getSelected(),
+			associated_system: form.getDropdown('Associated System').getSelected(),
+			change_type: form.getDropdown('Change Type').getSelected(),
+			change_category: form.getDropdown('Change Category').getSelected(),
 			mission_impact_statement: JSON.stringify({
-				styled: { ops: [{ insert: form.getTextField('mission_impact_statement').getText() }] }
+				styled: { ops: [{ insert: form.getTextField('Mission Impact').getText() }] }
 			}),
+			problem_statement: JSON.stringify({
+				styled: { ops: [{ insert: form.getTextField('Problem Statement').getText() }] }
+			}),
+
+			//Page 2
 			recommended_solution: JSON.stringify({
-				styled: { ops: [{ insert: form.getTextField('recommended_solution').getText() }] }
+				styled: { ops: [{ insert: form.getTextField('Recommended Solution').getText() }] }
 			}),
 			other_considerations: JSON.stringify({
-				styled: { ops: [{ insert: form.getTextField('other_considerations').getText() }] }
+				styled: { ops: [{ insert: form.getTextField('Other Considerations').getText() }] }
 			}),
 			stakeholder_comments: JSON.stringify({
-				styled: { ops: [{ insert: form.getTextField('stakeholder_comments').getText() }] }
+				styled: { ops: [{ insert: form.getTextField('Stakeholder Comments').getText() }] }
 			}),
-			submitter_signature: processSingleSignature(pdfDoc, 'submitter_signature'),
-			stakeholder_signature: processSingleSignature(pdfDoc, 'stakholder_signature'),
-			stakeholder_concur: form.getDropdown('stakholder_concur').getSelected(),
+			submitter_signature: processSingleSignature(pdfDoc, 'Submitter Signature'),
+			stakeholder_signature: processSingleSignature(pdfDoc, 'Stakholder Signature'),
+			stakeholder_concur: form.getDropdown('Stakholder Concur').getSelected(),
+
+			//Page 3
 			ccb_comments: JSON.stringify({
-				styled: { ops: [{ insert: form.getTextField('ccb_comments').getText() }] }
+				styled: { ops: [{ insert: form.getTextField('CCB Comments').getText() }] }
 			}),
-			ccb_concur: form.getDropdown('ccb_concur').getSelected(),
-			ccb_signature: processSingleSignature(pdfDoc, 'ccb_signature'),
-			projected_start_pi_number: form.getTextField('projected_start_pi_number').getText(),
-			projected_release_oa_number: form.getTextField('projected_release_oa_number').getText(),
-			road_map_approval: processSingleSignature(pdfDoc, 'road_map_approval'),
-			date_submitted: form.getTextField('date_submitted').getText()
-			// problem_statement: JSON.stringify({
-			// 	styled: { ops: [{ insert: form.getTextField('problem_statement').getText() }] }
-			// })
+			ccb_concur: form.getDropdown('CCB Concur').getSelected(),
+			ccb_signature: processSingleSignature(pdfDoc, 'CCB Signature'),
+			projected_start_pi_number: form.getTextField('Projected StartPI Number').getText(),
+			projected_release_oa_number: form.getTextField('Projected Release OA').getText(),
+			approved: form.getDropdown('Approved').getSelected(),
+			approval_signature: processSingleSignature(pdfDoc, 'Approval Signature')
 		};
 
 		return { success: true, ...newProposal };
